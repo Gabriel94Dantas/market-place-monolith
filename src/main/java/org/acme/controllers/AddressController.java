@@ -1,26 +1,26 @@
 package org.acme.controllers;
 
-import org.acme.services.ClientService;
+import org.acme.services.AddressService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/clients")
-public class ClientController {
+@Path("/addresses")
+public class AddressController {
 
-    private ClientService clientService;
+    private AddressService addressService;
 
-    public ClientController(){
-        this.clientService = new ClientService();
+    public AddressController(){
+        this.addressService = new AddressService();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(String client){
+    public Response post(String address){
         try{
-            this.clientService.addClient(client);
+            this.addressService.addAddress(address);
             return Response.status(Response.Status.CREATED).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -31,9 +31,9 @@ public class ClientController {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response put(String client){
+    public Response put(String address){
         try{
-            this.clientService.editClient(client);
+            this.addressService.editAddress(address);
             return Response.status(Response.Status.OK).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -44,9 +44,9 @@ public class ClientController {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(String client){
+    public Response delete(String address){
         try{
-            this.clientService.removeClient(client);
+            this.addressService.removeAddress(address);
             return Response.status(Response.Status.NO_CONTENT).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -55,25 +55,12 @@ public class ClientController {
     }
 
     @GET
+    @Path("clientId/{clientId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(){
-        try{
-            return Response.ok(this.clientService.returnAll()).build();
+    public Response getByClientId(@PathParam("clientId") String clientId){
+        try {
+            return Response.ok(this.addressService.returnByClientId(clientId)).build();
         }catch (Exception e){
-            e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GET
-    @Path("login")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getByEmailPassword(String login){
-        try{
-            return Response.ok(this.clientService.returnByEmailPassword(login)).build();
-        }catch (Exception e){
-            e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -83,7 +70,7 @@ public class ClientController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") String id){
         try{
-            return Response.ok(this.clientService.returnById(id)).build();
+            return Response.ok(this.addressService.returnById(id)).build();
         }catch (Exception e){
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
