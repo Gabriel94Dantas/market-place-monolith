@@ -1,27 +1,28 @@
 package org.acme.controllers;
 
-
-import org.acme.services.ProductService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import org.acme.services.ClientService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/products")
-public class ProductController {
+@Path("/clients")
+public class ClientController {
 
-    private ProductService productService;
+    private ClientService clientService;
 
-    public ProductController(){
-        this.productService = new ProductService();
+    public ClientController(){
+        this.clientService = new ClientService();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(String product){
-        try {
-            productService.addProduct(product);
+    public Response post(String client){
+        try{
+            this.clientService.addClient(client);
             return Response.status(Response.Status.CREATED).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -32,9 +33,9 @@ public class ProductController {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response put(String product){
-        try {
-            productService.editProduct(product);
+    public Response put(String client){
+        try{
+            this.clientService.editClient(client);
             return Response.status(Response.Status.OK).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -45,9 +46,9 @@ public class ProductController {
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(String product){
-        try {
-            productService.removeProduct(product);
+    public Response delete(String client){
+        try{
+            this.clientService.removeClient(client);
             return Response.status(Response.Status.NO_CONTENT).build();
         }catch (Exception e){
             e.printStackTrace();
@@ -58,9 +59,21 @@ public class ProductController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(){
-        try {
-            String products = productService.returnProductAll();
-            return Response.ok(products).build();
+        try{
+            return Response.ok(this.clientService.returnAll()).build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GET
+    @Path("login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByEmailPassword(String login){
+        try{
+            return Response.ok(this.clientService.returnByEmailPassword(login)).build();
         }catch (Exception e){
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -71,22 +84,8 @@ public class ProductController {
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") String id){
-        try {
-            String product = productService.returnProductById(id);
-            return Response.ok(product).build();
-        }catch (Exception e){
-            e.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GET
-    @Path("code/{code}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getByCode(@PathParam("code") String code){
-        try {
-            String product = productService.returnProductByCode(code);
-            return Response.ok(product).build();
+        try{
+            return Response.ok(this.clientService.returnById(id)).build();
         }catch (Exception e){
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
