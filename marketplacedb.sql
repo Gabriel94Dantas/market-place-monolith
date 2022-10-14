@@ -2,7 +2,7 @@
 --
 -- Host: 127.0.0.1    Database: marketplacedb
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -73,7 +73,6 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` VALUES ('06d22a66-06d9-4c27-9d68-ce5956896033','Fulano','da Silva','fulana.da.silva@example.com','123456'),('22d2f830-d379-471d-8aff-f1dbe7ac97a0','Juliana','Dantas','juliana.a.caliman@example.com','654321'),('f1c161af-2550-4985-956d-654f075a27a4','Gabriel','Dantas','gabriel.dantas@example.com','123456');
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +100,6 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES ('5f6359b2-f147-4c1a-b618-efbfd4aa83c4','Bola de Gude',1000,2.800000,'0000000000000'),('6f620d91-bc12-4573-8ff3-b27b26eaebe9','Carro de Brinquedo',100,8.800000,'111111111'),('8b75d23e-38ad-42c6-a007-c54606a16794','Remo',1000,119.900000,'222222222222'),('baf107ae-8ae4-40a0-aaee-041e31e07530','Chaveiro',1000,0.800000,'0000000000000');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-11 15:35:16
+-- Dump completed on 2022-10-14 15:31:28

@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: r00T12#
+      MYSQL_DATABASE: marketplacedb
+      MYSQL_HOST: jdbc:mysql://localhost:3306/marketplacedb
+      MYSQL_PASSWORD: r00T12#
+      MYSQL_APP_USER: root
+    ports:
+      - '3306:3306'
